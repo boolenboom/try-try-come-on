@@ -1,0 +1,12 @@
+*{
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+}
+.container{
+    margin: auto;
+    width: 1440px;
+    @media (max-width:1439px) {
+        width: 768px;
+    }
+}

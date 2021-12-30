@@ -1,0 +1,17 @@
+* {
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+}
+
+.container {
+  margin: auto;
+  width: 1440px;
+}
+
+@media (max-width: 1439px) {
+  .container {
+    width: 768px;
+  }
+}
+/*# sourceMappingURL=main.css.map */
