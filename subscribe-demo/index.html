@@ -15,19 +15,20 @@
         </div>
     </div>
 </body>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jsSHA/3.2.0/sha.js' integrity='sha512-mvfoZwdzM8yPhlNxN1lU8S5wcfC5aPRCD3W0jsOeA+D75MMCrycxQqIvt6K7c5P7jItn7AXiAreuR+eockUHwQ==' crossorigin='anonymous'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jsSHA/3.2.0/sha1.js' integrity='sha512-6I60Pg/Ip+965K5kUtWjQPLfbaQ4D+skGtwANJhx2W26HYacZAdxCd325TDT5K2mV4vDFjE4inhqjgoP23lo9Q==' crossorigin='anonymous'></script>
 <script src="js/eventChannel.js"></script>
 <script src="js/APIFetcher.js"></script>
 <script>
     let infoCenter = {
         data:'沒有資料'
     };
-    installEvent(infoCenter);
-    infoCenter.listen('PTXdata',function(data, message){
-        this.data = data;
-        broadCastConsole(message);
-        refreshView();
-    });//註冊監聽事件
+
+    let channel = eventChannel.channel;
+    channel('info').listen('PTXdata', function (message, data) {
+            infoCenter.data = data;
+            broadCastConsole(message);
+            refreshView();
+        });
     let dom_h1_content = document.querySelector('.content');
     refreshView();
     
@@ -52,11 +53,11 @@
         dom_h1_content.appendChild(vDom_ul);
     }
     
-    let fetchPTX = new fetcher();
+    let PTXData = new APIFactory( 'PTXData' );
     let dom_button_submit = document.querySelector('.submit');
     dom_button_submit.addEventListener('click',function(){
-        let boundTrigger = infoCenter.trigger.bind(infoCenter);
-        fetchPTX.getData(boundTrigger, 'PTXdata', '接收到資料嚕');
+        let boundTrigger = channel('info').trigger.bind(eventChannel);
+        PTXData.getAPIData(boundTrigger, 'PTXdata', '接收到資料嚕');
     });
 </script>
 </html>
