@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../main-style/main.css">
+    <title>subscribe and publish</title>
+</head>
+<body>
+    <div class="container">
+        <div id="app">
+            <div class="content"></div>
+            <button class="submit">想要獲得資料請按我</button>
+        </div>
+    </div>
+</body>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jsSHA/3.2.0/sha1.js' integrity='sha512-6I60Pg/Ip+965K5kUtWjQPLfbaQ4D+skGtwANJhx2W26HYacZAdxCd325TDT5K2mV4vDFjE4inhqjgoP23lo9Q==' crossorigin='anonymous'></script>
+<script src="js/eventChannel.js"></script>
+<script src="js/APIFetcher.js"></script>
+<script>
+    let infoCenter = {
+        data:'沒有資料'
+    };
+
+    let channel = eventChannel.channel;
+    channel('info').listen('PTXdata', function (message, data) {
+            infoCenter.data = data;
+            broadCastConsole(message);
+            refreshView();
+        });
+    let dom_h1_content = document.querySelector('.content');
+    refreshView();
+    
+    function broadCastConsole(msg){
+        console.log('information check:',msg);
+    }
+    function refreshView(){
+        if(typeof infoCenter.data == 'string'){
+            dom_h1_content.innerHTML = infoCenter.data;
+            return ;
+        }
+        let vDom_ul = document.createElement('ul')
+        for(let item in infoCenter.data){
+            let element = document.createElement('li');
+            for(let key in infoCenter.data[item]){
+                element.innerHTML += `<div>${key}:${infoCenter.data[item][key]}</div>`;
+            }
+            console.log(item);
+            vDom_ul.appendChild(element);
+        }
+        dom_h1_content.innerHTML = '';
+        dom_h1_content.appendChild(vDom_ul);
+    }
+    
+    let PTXData = new APIFactory( 'PTXData' );
+    let dom_button_submit = document.querySelector('.submit');
+    dom_button_submit.addEventListener('click',function(){
+        let boundTrigger = channel('info').trigger.bind(eventChannel);
+        PTXData.getAPIData(boundTrigger, 'PTXdata', '接收到資料嚕');
+    });
+</script>
+</html>
