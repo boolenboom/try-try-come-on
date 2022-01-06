@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../main-style/main.css">
+    <link rel="stylesheet" href="style/style.css">
+    <title>PIXI 初嘗</title>
+</head>
+<body>
+    <div class="container">
+        <h1>莫比烏斯環</h1>
+        <div id="app01"></div>
+        <h1>容器操作</h1>
+        <div id="app02"></div>
+        <h1>畫布切齊</h1>
+        <div id="app03"></div>
+    </div>
+</body>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/pixi.js/6.2.1/browser/pixi.js' integrity='sha512-/r7HSOI/7Ys+lVTAbc1OJk8/3MTpYCRHQxWABpZ/mFZyKPtqf/9VgTVvLskBDpUOQ3TNV84dGFIPoxy6r8bbMw==' crossorigin='anonymous'></script>
+<script>
+    ;(function(){
+        let app = document.querySelector('#app01');
+        //建立畫布
+        let pixiobj = new PIXI.Application({ width: 640, height: 360 });
+        app.appendChild(pixiobj.view);//綁上DOM
+        //新增sprite
+        let flyer = PIXI.Sprite.from('img/sample.png');
+        pixiobj.stage.addChild(flyer);//sprite丟上舞台
+        //Update Loop控制sprite做莫比烏斯環
+        let elapsed = 0.0;
+        const PI = Math.PI;
+        pixiobj.ticker.add((delta) => {
+            elapsed += delta;
+            //sprite水平來回移動，4秒一個循環
+            flyer.x = 100.0 + Math.cos(elapsed/100*PI) * 100.0;
+            //sprite垂直上下移動，2秒一個循環
+            flyer.y = Math.sin(elapsed/50*PI) * 50.0;
+        });
+        
+    })();
+    ; (function () {
+            let app = document.querySelector('#app02');
+            //建立畫布
+            let pixiobj = new PIXI.Application({ width: 800, height: 600, backgroundColor: 0x1099bb, 
+                resolution:window.devicePixelRatio || 1 });
+            app.appendChild(pixiobj.view);//綁上DOM
+            //建立容器
+            const container = new PIXI.Container();
+            pixiobj.stage.addChild(container);
+            //新增texture
+            const texture = PIXI.Texture.from('img/sample.png');
+            //做出5x5的飛機貼圖，並綁到容器內
+            for(let i = 0; i < 25; i++){
+                const flyer = new PIXI.Sprite(texture);
+                flyer.anchor.set(0.5);
+                flyer.x = (i % 5) * 40;
+                flyer.y = Math.floor(i / 5) *40;
+                container.addChild(flyer);
+            }
+            //移動到畫面中心
+            container.x = pixiobj.screen.width / 2;
+            container.y = pixiobj.screen.height / 2;
+            //基準點移到容器中心
+            container.pivot.x = container.width / 2;
+            container.pivot.y = container.height / 2;
+            //Update Loop控制container旋轉
+            let elapsed = 0.0;
+            const PI = Math.PI;
+            pixiobj.ticker.add((delta) => {
+                container.rotation -= 0.01 * delta;
+            });
+    })();
+    ; (function(){
+        let appDom = document.querySelector('#app03');
+        let containerDom = document.querySelector('.container');
+        let pixiobj = new PIXI.Application({width:containerDom.clientWidth, height:600, backgroundColor: 0xf5c000,
+            resolution: window.devicePixelRatio || 1 });
+        appDom.appendChild(pixiobj.view);
+        let canvasDom = appDom.querySelector('canvas');
+
+        let flyer = PIXI.Sprite.from('img/sample.png');
+        console.log(flyer);
+        flyer.anchor.set(0.5);
+        pixiobj.stage.addChild(flyer);//sprite丟上舞台
+        //Update Loop控制sprite做莫比烏斯環
+        let elapsed = 0.0;
+        const PI = Math.PI;
+        pixiobj.ticker.add((delta) => {
+            elapsed += delta;
+            //sprite水平來回移動，4秒一個循環
+            flyer.x = pixiobj.screen.width / 2 + Math.cos(elapsed / 100 * PI) * 100.0;
+            //sprite垂直上下移動，2秒一個循環
+            flyer.y = pixiobj.screen.height / 2 + Math.sin(elapsed / 50 * PI) * 50.0;
+        });
+        window.addEventListener('resize', function () {
+            canvasDom.width = containerDom.clientWidth;
+            pixiobj.resize()
+            console.log(pixiobj);
+        });
+    })()
+</script>
+</html>
