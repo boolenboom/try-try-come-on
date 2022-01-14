@@ -1,0 +1,67 @@
+.rect {
+  display: block;
+  height: 300px;
+  width: 300px;
+  margin: auto;
+}
+
+.margin-50-50 {
+  margin: 50vh auto;
+}
+
+.red {
+  background-color: #cf2342;
+}
+
+.blue {
+  background-color: #2153c8;
+}
+
+.yellow {
+  background-color: #c8c80f;
+}
+
+.pin-aninmation {
+  margin: 50vh 0;
+}
+
+.text-animation {
+  overflow-x: hidden;
+  background-color: #2153c8;
+  height: 100vh;
+}
+
+.text-column {
+  font-size: 16rem;
+  position: relative;
+}
+
+.text-column span {
+  color: transparent;
+  -webkit-text-stroke: 4px #ffffff;
+}
+
+.text-column.id01 {
+  left: -300px;
+}
+
+.text-column.id02 {
+  left: -900px;
+}
+
+.text-column.id03 {
+  left: -1200px;
+}
+
+.section-summary {
+  margin: 200px 0px;
+}
+
+.section-summary h1 {
+  font-size: 5rem;
+}
+
+.section-summary summary {
+  font-size: 3rem;
+}
+/*# sourceMappingURL=style.css.map */
