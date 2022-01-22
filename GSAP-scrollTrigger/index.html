@@ -41,6 +41,33 @@
             neque nisi iusto officia perspiciatis.
         </summary>
     </div>
+    <div class="section-hole">
+        <h1 class="text">Portfolio & Links</h1>
+        <h1 class="text">Portfolio & Links</h1>
+        <h1 class="text">Portfolio & Links</h1>
+        <h1 class="text">Portfolio & Links</h1>
+        <h1 class="text">Portfolio & Links</h1>
+        <h1 class="text">Portfolio & Links</h1>
+        <h1 class="text">Portfolio & Links</h1>
+        <h1 class="text">Portfolio & Links</h1>
+        <h1 class="text">Portfolio & Links</h1>
+
+        <h1 class="text">Portfolio & Links</h1>
+        <h1 class="text">Portfolio & Links</h1>
+        <h1 class="text">Portfolio & Links</h1>
+        <h1 class="text">Portfolio & Links</h1>
+        <h1 class="text">Portfolio & Links</h1>
+        <h1 class="text">Portfolio & Links</h1>
+        <h1 class="text">Portfolio & Links</h1>
+        <h1 class="text">Portfolio & Links</h1>
+        <h1 class="text">Portfolio & Links</h1>
+        <div class="hole">
+            <h1>title</h1>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos, 
+                vitae excepturi pariatur cumque repellat quisquam cupiditate suscipit minima reprehenderit 
+                consequuntur odio nihil iste earum dolores illum doloremque obcaecati ab laboriosam!</p>
+        </div>
+    </div>
 </body>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.js' integrity='sha512-1KGTH8Epj8H43YrKn130fyDzVvNn2YMoyYy6TmF2tgemLZ4sfSoAxRSPq9li4BKHdoON4GwwQUMPL2gFreHSbw==' crossorigin='anonymous'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js' integrity='sha512-5efjkDjhldlK+BrHauVYJpbjKrtNemLZksZWxd6Wdxvm06dceqWGLLNjZywOkvW7BF032ktHRMUOarbK9d60bg==' crossorigin='anonymous'></script>
@@ -93,6 +120,68 @@
         scrub: 1,
         pin: true,
     });
+
+    let tl3 = gsap.timeline()
+    .to( '.section-hole .text', {
+        startAt: {
+            opacity: 0,
+            x: function (index) {
+                return Math.floor(index / 9) * -90 + (index % 9 + 3) * 6 + 'rem';
+            },
+            y: function (index) {
+                return Math.floor(index / 9) * 15 + index % 9 * 75 + '%';
+            },
+            zIndex: function(index) {
+                return 100 - index;
+            }
+        },
+        duration:0.1
+    })
+    .to( '.section-hole .text', {
+        opacity:1,
+        ease: 'steps(1)',
+        stagger:0.2,
+        duration: 4
+    })
+    .to('.section-hole .text', {
+        transformOrigin: function (index) {
+            if (index > 8) return '100% 50%';
+            return 'left 50%';
+        },
+        rotation: function(index){
+            if(index > 8) return +(index - 13) * -25;
+            return +(index - 5) * 20;
+        },
+        x: function (index) {
+            if (index > 8) return -61 + 'rem';
+            return 30 + 'rem';
+        },
+        y: function (index) {
+            return +(index - 2.8) * -100 + '%';
+        },
+        skewX: 60,
+        skewY: 15,
+        duration:3,
+        scale:0.5,
+        ease: 'expo'
+    })
+    .to('.section-hole .hole', {
+        scale: 1,
+        duration: 1
+    })
+    .to('.section-hole .text', {
+        scale: 0,
+        duration: 1
+    }, '-=1')
+
+    ScrollTrigger.create({
+        animation: tl3,
+        trigger: '.section-hole',
+        start: 'top top',
+        end: '+=800',
+        scrub: 1,
+        pin: true,
+    })
 
 </script>
 </html>

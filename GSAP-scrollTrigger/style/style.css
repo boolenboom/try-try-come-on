@@ -64,4 +64,42 @@
 .section-summary summary {
   font-size: 3rem;
 }
+
+.section-hole {
+  overflow: hidden;
+  position: relative;
+  height: 100vh;
+  background-color: #2185c8;
+}
+
+.section-hole .text {
+  position: absolute;
+  z-index: 10;
+  font-size: 12rem;
+  line-height: .75;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.section-hole .hole {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 100px;
+  margin: auto;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  height: 60vh;
+  width: 60vh;
+  padding: 9vh;
+  border-radius: 50%;
+  background-color: #193f99;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+}
+
+.section-hole .hole > * {
+  display: none;
+}
 /*# sourceMappingURL=style.css.map */

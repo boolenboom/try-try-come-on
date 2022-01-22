@@ -52,3 +52,35 @@
         font-size: 3rem;
     }
 }
+.section-hole{
+    overflow: hidden;
+    position: relative;
+    height: 100vh;
+    background-color: #2185c8;
+    .text{
+        position: absolute;
+        z-index: 10;
+        font-size: 12rem;
+        line-height: .75;
+        width: fit-content;
+    }
+    .hole{
+        // display: none;
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        left: 100px;
+        margin: auto;
+        // box-shadow: 0 0 300px 300px rgba($color: #fff, $alpha: .5), 0 0 20px 60px #fff, inset 0 0 20px 0px #fff;
+        box-sizing: border-box;
+        height: 60vh;
+        width: 60vh;
+        padding: 9vh;
+        border-radius: 50%;
+        background-color: #193f99;
+        transform: scale(0);
+        & > *{
+            display: none;
+        }
+    }
+}
