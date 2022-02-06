@@ -70,16 +70,22 @@
   position: relative;
   height: 100vh;
   background-color: #2185c8;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  -webkit-perspective: 800px;
+          perspective: 800px;
+  -webkit-perspective-origin: 50% 50%;
+          perspective-origin: 50% 50%;
 }
 
 .section-hole .text {
   position: absolute;
+  top: 0;
   z-index: 10;
-  font-size: 12rem;
+  font-size: 30rem;
   line-height: .75;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
+  background-color: #2185c8;
+  word-break: break-all;
 }
 
 .section-hole .hole {

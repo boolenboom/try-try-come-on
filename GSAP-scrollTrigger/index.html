@@ -42,25 +42,21 @@
         </summary>
     </div>
     <div class="section-hole">
-        <h1 class="text">Portfolio & Links</h1>
-        <h1 class="text">Portfolio & Links</h1>
-        <h1 class="text">Portfolio & Links</h1>
-        <h1 class="text">Portfolio & Links</h1>
-        <h1 class="text">Portfolio & Links</h1>
-        <h1 class="text">Portfolio & Links</h1>
-        <h1 class="text">Portfolio & Links</h1>
-        <h1 class="text">Portfolio & Links</h1>
-        <h1 class="text">Portfolio & Links</h1>
-
-        <h1 class="text">Portfolio & Links</h1>
-        <h1 class="text">Portfolio & Links</h1>
-        <h1 class="text">Portfolio & Links</h1>
-        <h1 class="text">Portfolio & Links</h1>
-        <h1 class="text">Portfolio & Links</h1>
-        <h1 class="text">Portfolio & Links</h1>
-        <h1 class="text">Portfolio & Links</h1>
-        <h1 class="text">Portfolio & Links</h1>
-        <h1 class="text">Portfolio & Links</h1>
+        <h1 class="text">Portfolio</h1>
+        <h1 class="text">Portfolio</h1>
+        <h1 class="text">Portfolio</h1>
+        <h1 class="text">Portfolio</h1>
+        <h1 class="text">Portfolio</h1>
+        <h1 class="text">Portfolio</h1>
+        <h1 class="text">Portfolio</h1>
+        <h1 class="text">Portfolio</h1>
+        <h1 class="text">Portfolio</h1>
+        <h1 class="text">Portfolio</h1>
+        <h1 class="text">Portfolio</h1>
+        <h1 class="text">Portfolio</h1>
+        <h1 class="text">Portfolio</h1>
+        <h1 class="text">Portfolio</h1>
+        <h1 class="text">Portfolio</h1>
         <div class="hole">
             <h1>title</h1>
             <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos, 
@@ -125,15 +121,12 @@
     .to( '.section-hole .text', {
         startAt: {
             opacity: 0,
-            x: function (index) {
-                return Math.floor(index / 9) * -90 + (index % 9 + 3) * 6 + 'rem';
-            },
             y: function (index) {
-                return Math.floor(index / 9) * 15 + index % 9 * 75 + '%';
+                return index * (50 - 3.5 * index) + '%';
             },
             zIndex: function(index) {
                 return 100 - index;
-            }
+            },
         },
         duration:0.1
     })
@@ -144,35 +137,20 @@
         duration: 4
     })
     .to('.section-hole .text', {
-        transformOrigin: function (index) {
-            if (index > 8) return '100% 50%';
-            return 'left 50%';
+        transformOrigin: '0% 50%',
+        x: function(index){
+            return gsap.utils.interpolate(['50%', '0%', '50%'], index / 9);
         },
-        rotation: function(index){
-            if(index > 8) return +(index - 13) * -25;
-            return +(index - 5) * 20;
+        y: function(index){
+            return (index - 4) * 50 + '%';
         },
-        x: function (index) {
-            if (index > 8) return -61 + 'rem';
-            return 30 + 'rem';
+        rotationY: 75,
+        rotationX: function(index){
+            return gsap.utils.interpolate([-90, 0, 90], index / 9);
         },
-        y: function (index) {
-            return +(index - 2.8) * -100 + '%';
-        },
-        skewX: 60,
-        skewY: 15,
         duration:3,
-        scale:0.5,
         ease: 'expo'
-    })
-    .to('.section-hole .hole', {
-        scale: 1,
-        duration: 1
-    })
-    .to('.section-hole .text', {
-        scale: 0,
-        duration: 1
-    }, '-=1')
+    });
 
     ScrollTrigger.create({
         animation: tl3,

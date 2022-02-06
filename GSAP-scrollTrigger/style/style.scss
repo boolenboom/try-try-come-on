@@ -57,12 +57,17 @@
     position: relative;
     height: 100vh;
     background-color: #2185c8;
+    transform-style: preserve-3d;
+    perspective: 800px;
+    perspective-origin: 50% 50%;
     .text{
         position: absolute;
+        top: 0;
         z-index: 10;
-        font-size: 12rem;
+        font-size: 30rem;
         line-height: .75;
-        width: fit-content;
+        background-color: #2185c8;
+        word-break: break-all;
     }
     .hole{
         // display: none;
