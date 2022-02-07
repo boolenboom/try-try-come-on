@@ -121,8 +121,8 @@
     .to( '.section-hole .text', {
         startAt: {
             opacity: 0,
-            y: function (index) {
-                return index * (50 - 3.5 * index) + '%';
+            y: function (index, target, targets) {
+                return gsap.utils.interpolate(0, 200, 1 - Math.pow((index / 15) - 1, 4)) + '%';
             },
             zIndex: function(index) {
                 return 100 - index;
@@ -137,26 +137,27 @@
         duration: 4
     })
     .to('.section-hole .text', {
-        transformOrigin: '0% 50%',
-        x: function(index){
-            return gsap.utils.interpolate(['50%', '0%', '50%'], index / 9);
-        },
-        y: function(index){
-            return (index - 4) * 50 + '%';
-        },
-        rotationY: 75,
-        rotationX: function(index){
-            return gsap.utils.interpolate([-90, 0, 90], index / 9);
+        transformOrigin: '150% 50%',
+        x: '-100%',
+        y: '50%',
+        z: -1800,
+        rotationY: 60,
+        rotation: function(index){
+            return index * -(360 / 15);
         },
         duration:3,
         ease: 'expo'
+    })
+    .to('.section-hole .text', {
+        z: -600,
+        duration:3,
     });
 
     ScrollTrigger.create({
         animation: tl3,
         trigger: '.section-hole',
         start: 'top top',
-        end: '+=800',
+        end: '+=1000',
         scrub: 1,
         pin: true,
     })

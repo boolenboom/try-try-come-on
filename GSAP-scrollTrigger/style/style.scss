@@ -58,13 +58,14 @@
     height: 100vh;
     background-color: #2185c8;
     transform-style: preserve-3d;
-    perspective: 800px;
+    perspective: 50px;
     perspective-origin: 50% 50%;
     .text{
         position: absolute;
         top: 0;
         z-index: 10;
-        font-size: 30rem;
+        font-size: 50vmin;
+        width: 100%;
         line-height: .75;
         background-color: #2185c8;
         word-break: break-all;
