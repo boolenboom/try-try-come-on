@@ -64,13 +64,26 @@
                 consequuntur odio nihil iste earum dolores illum doloremque obcaecati ab laboriosam!</p>
         </div>
     </div>
+    <div class="section-loaded">
+        <span>
+            L</span><span>
+            o</span><span>
+            a</span><span>
+            d</span><span>
+            i</span><span>
+            n</span><span>
+            g
+        </span>
+    </div>
 </body>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.js' integrity='sha512-1KGTH8Epj8H43YrKn130fyDzVvNn2YMoyYy6TmF2tgemLZ4sfSoAxRSPq9li4BKHdoON4GwwQUMPL2gFreHSbw==' crossorigin='anonymous'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js' integrity='sha512-5efjkDjhldlK+BrHauVYJpbjKrtNemLZksZWxd6Wdxvm06dceqWGLLNjZywOkvW7BF032ktHRMUOarbK9d60bg==' crossorigin='anonymous'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/CustomEase.min.js' integrity='sha512-Av7Xa4snIobw1rWLKoVtFpsyIDVpNKj7QOTSKD+7xZxqeuXvMPwpwoq91zs4rw138w0pUhm8YVL6jKko34qmMA==' crossorigin='anonymous'></script>
 <script>
     ;
     window.scrollTo( 0, 0 );
     gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(CustomEase);
     gsap.defaults( {ease: 'none', duration: 10} );
 
     let tl1 = gsap.timeline();
@@ -160,6 +173,33 @@
         end: '+=1000',
         scrub: 1,
         pin: true,
+    });
+
+    let tl4 = gsap.timeline()
+    .to( '.section-loaded span', {
+        startAt:{
+            x: function(index){
+                return gsap.utils.random(100 / 7 * index, 100 / 7 * (index + 1)) + 'vw';
+            },
+            y: 'random(10, 60)' + 'vh',
+            rotation: 'random(-45, 75)'
+        },
+        duration: 1,
+        stagger: 1
+    })
+    .to( '.section-loaded span', {
+        rotation: '+=random(60,180)',
+        x: function(index, target){
+            console.log(target.style.transform);
+            return gsap.utils.random(0, 80) + 'vw';
+        },
+        y: function(){
+            return gsap.utils.random(0, 80) + 'vh';
+        },
+        repeat: -1,
+        repeatRefresh: true,
+        ease:  CustomEase.create("custom", "M0,0,C0.304,0,0.392,0.118,0.5,0.5,0.516,0.557,0.7,1,1,1"),
+        duration: 10,
     })
 
 </script>

@@ -90,3 +90,16 @@
         }
     }
 }
+.section-loaded{
+    width: 100%;
+    height: 100vh;
+    background-color: #2185c8;
+    position: relative;
+    overflow: hidden;
+    span{
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-size: 12rem;
+    }
+}
