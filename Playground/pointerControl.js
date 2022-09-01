@@ -1,5 +1,7 @@
 ;(function (){
     let dom = document.querySelector('body');
+    console.log(navigator.userAgentData);
+    
     function pointerPosToStyle(evt){
         window.requestAnimationFrame(()=>{
             const styleVar = `--pointer-x:${evt.x}px;
@@ -24,4 +26,15 @@
         })
     }
     window.addEventListener('pointermove',pointerPosToStyle);
+
+    function mobileDeviceDetect(){
+        if(navigator.userAgentData.mobile){
+            window.removeEventListener('pointermove',pointerPosToStyle);
+            dom.classList.add('phone-device');
+        }else{
+            dom.classList.remove('phone-device');
+        }
+    }
+    mobileDeviceDetect();
+    window.addEventListener('resize',mobileDeviceDetect);
 })();
