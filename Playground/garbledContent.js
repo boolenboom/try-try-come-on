@@ -25,7 +25,6 @@
         }
         return ((to * modRatio - from * modRatio) * basis + from * modRatio) / modRatio; 
     }
-    let effectSwitch = true;
     let isAnimating = false;
     function garbledPerFrame(){
         window.requestAnimationFrame(()=>{
@@ -38,7 +37,6 @@
                     doms[index].innerHTML = unGarbled + Math.floor(Math.random() * Math.pow(10, stringLength)) + contents[index][1];
                 }
                 times--;
-                isAnimating = true;
                 setTimeout(garbledPerFrame, secondPerMillisecond);
             }
             else{
@@ -46,20 +44,15 @@
                 for (let index = 0; index < doms.length; index++) {
                     doms[index].innerHTML = contents[index][0] + contents[index][1];
                 }
-                effectSwitch = false;
                 isAnimating = false;
                 console.log('animation done');
             }
         })
     }
-    function animationGarbled(){
-        if(effectSwitch && !isAnimating){
-            effectSwitch = false;
-
+    function animationGarbled(entrys){
+        if(entrys[0].intersectionRatio > 0.5 && !isAnimating){
+            isAnimating = true;
             garbledPerFrame();
-        }
-        else{
-            effectSwitch = true;
         }
     }
     let scrollDetect = new IntersectionObserver(animationGarbled, {
